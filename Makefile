@@ -1,4 +1,4 @@
-bin = MedNES
+bin = cloNES
 src = $(wildcard src/*.cpp src/mapper/*.cpp src/common/*.cpp main.cpp)
 obj = $(src:.cpp=.o)
 
