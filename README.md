@@ -25,6 +25,14 @@ These instructions will get you a copy of the project up and running on your loc
 
 `./MedNES -insert <path/to/rom>`
 
+### Usage
+
+- arrow keys, 
+- enter (start), 
+- space (select), 
+- X (A), 
+- C (B). 
+
 ## Projects
 
 Here are some projects that build on top of MedNES:

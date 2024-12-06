@@ -1,6 +1,8 @@
 bin = MedNES
-src = $(wildcard Source/Core/*.cpp Source/Core/Mapper/*.cpp Source/Core/Common/*.cpp Source/Desktop/Main.cpp)
+src = $(wildcard src/*.cpp src/mapper/*.cpp src/common/*.cpp main.cpp)
 obj = $(src:.cpp=.o)
+
+CXX = g++
 
 CXXFLAGS = -g -Wall -Wextra -O2 -std=c++14 -pedantic $(shell pkg-config --cflags sdl2)
 LDFLAGS = $(shell pkg-config --libs sdl2)

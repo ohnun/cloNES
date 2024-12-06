@@ -1,9 +1,4 @@
-!screenshots/*
 *.o
 MedNES
 .vscode
-.DS_Store
 build
-Source/Web/emscripten.js
-Source/Web/*.wasm
-
