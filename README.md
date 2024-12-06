@@ -25,13 +25,6 @@ These instructions will get you a copy of the project up and running on your loc
 
 `./MedNES -insert <path/to/rom>`
 
-### Screenshots ###
-
-| | | |
-|:-------------------------:|:-------------------------:|:-------------------------:|
-|![alt text](https://github.com/wpmed92/MedNES/blob/master/Screenshots/Super%20Mario%20Bros.png) Super Mario Bros |  ![alt text](https://github.com/wpmed92/MedNES/blob/master/Screenshots/Donkey-Kong.png) Donkey Kong |![alt text](https://github.com/wpmed92/MedNES/blob/master/Screenshots/Bomberman%20II.png) Bomberman II |
-|![alt text](https://github.com/wpmed92/MedNES/blob/master/Screenshots/Pac-Man.png) Pac-Man |![alt text](https://github.com/wpmed92/MedNES/blob/master/Screenshots/Mega%20Man.png) Mega Man |![alt text](https://github.com/wpmed92/MedNES/blob/master/Screenshots/Zelda.png) The Legend of Zelda |
-
 ## Projects
 
 Here are some projects that build on top of MedNES:
