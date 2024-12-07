@@ -1,14 +1,15 @@
 #include <SDL2/SDL.h>
 
-#include <chrono>
 #include <iostream>
-#include <map>
 
 #include "src/6502.hpp"
 #include "src/Controller.hpp"
 #include "src/Mapper/Mapper.hpp"
 #include "src/PPU.hpp"
 #include "src/ROM.hpp"
+
+#define TARGET_FPS 60
+#define FRAME_DELAY (1000 / TARGET_FPS)
 
 int main(int argc, char **argv) {
     std::string romPath = argv[1];
@@ -18,9 +19,9 @@ int main(int argc, char **argv) {
     }
 
     SDL_Window *window;
-    std::string window_title = "cloNES";
     bool headlessMode = false;
 
+    std::string window_title = "cloNES";
     window = SDL_CreateWindow(
         window_title.c_str(),     // window title
         SDL_WINDOWPOS_UNDEFINED,  // initial x position
@@ -61,14 +62,12 @@ int main(int argc, char **argv) {
     cpu.reset();
     SDL_Texture *texture = SDL_CreateTexture(s, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, 256, 240);
 
-    //For perf
-    int nmiCounter = 0;
-    float duration = 0;
-
     while (is_running) {
         cpu.step();
 
         if (ppu.generateFrame) {
+            Uint32 frameStart = SDL_GetTicks();
+
             //Poll controller
             while (SDL_PollEvent(&event)) {
                 switch (event.type) {
@@ -93,6 +92,12 @@ int main(int argc, char **argv) {
             SDL_RenderClear(s);
             SDL_RenderCopy(s, texture, NULL, NULL);
             SDL_RenderPresent(s);
+
+            // Lock fps. 
+            Uint32 frameTime = SDL_GetTicks() - frameStart;
+            if (frameTime < FRAME_DELAY) {
+                SDL_Delay(FRAME_DELAY - frameTime);
+            }
         }
     }
 
