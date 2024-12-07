@@ -42,8 +42,10 @@ class CPU6502 {
         CARRY = 0
     };
 
-   public:
-    CPU6502(Mapper *mapper, PPU *ppu, Controller *controller) : mapper(mapper), ppu(ppu), controller(controller){};
+public:
+    CPU6502(Mapper *mapper, PPU *ppu, Controller *controller) 
+    : mapper(mapper), ppu(ppu), controller(controller){};
+
     u8 fetchInstruction();
     void executeInstruction(u8 instruction);
     u8 memoryAccess(MemoryAccessMode mode, u16 address, u8 data);
@@ -55,7 +57,7 @@ class CPU6502 {
     void setProgramCounter(u16 pc);
     ExecutionState *getExecutionState();
 
-   private:
+private:
     //Arithmetic
     u8 accumulator = 0;
     u8 xRegister = 0;

@@ -27,7 +27,7 @@ struct INESHeader {
 };
 
 class ROM {
-   public:
+public:
     std::vector<u8> getChrData() { return chrData; };
     std::vector<u8> getPrgCode() { return prgCode; };
     void open(std::string);
@@ -35,7 +35,7 @@ class ROM {
     int getMirroring();
     Mapper *getMapper();
 
-   private:
+private:
     INESHeader header;
     std::vector<u8> trainer;
     std::vector<u8> prgCode;

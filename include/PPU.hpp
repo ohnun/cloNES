@@ -44,9 +44,9 @@ struct SpriteRenderEntity {
     }
 };
 
-class PPU : public INESBus {
-   public:
-    PPU(Mapper *mapper) : mapper(mapper){};
+class PPU: public INESBus {
+public:
+    PPU(Mapper *mapper): mapper(mapper){};
 
     //cpu address space
     u8 read(u16 address);
@@ -64,52 +64,46 @@ class PPU : public INESBus {
     void printState();
     uint32_t buffer[256 * 240] = {0};
 
-   private:
+private:
     //Registers
 
     //$2000 PPUCTRL
     union {
-        struct
-        {
-            unsigned baseNametableAddress : 2;
-            unsigned vramAddressIncrement : 1;
-            unsigned spritePatternTableAddress : 1;
-            unsigned bgPatternTableAddress : 1;
-            unsigned spriteSize : 1;
-            unsigned ppuMasterSlaveSelect : 1;
-            unsigned generateNMI : 1;
+        struct {
+            unsigned baseNametableAddress: 2;
+            unsigned vramAddressIncrement: 1;
+            unsigned spritePatternTableAddress: 1;
+            unsigned bgPatternTableAddress: 1;
+            unsigned spriteSize: 1;
+            unsigned ppuMasterSlaveSelect: 1;
+            unsigned generateNMI: 1;
         };
-
         u8 val;
     } ppuctrl;
 
     //$2001 PPUMASK
     union {
-        struct
-        {
-            unsigned greyScale : 1;
-            unsigned showBgLeftmost8 : 1;
-            unsigned showSpritesLeftmost8 : 1;
-            unsigned showBg : 1;
-            unsigned showSprites : 1;
-            unsigned emphasizeRed : 1;
-            unsigned emphasizeGreen : 1;
-            unsigned emphasizeBlue : 1;
+        struct {
+            unsigned greyScale: 1;
+            unsigned showBgLeftmost8: 1;
+            unsigned showSpritesLeftmost8: 1;
+            unsigned showBg: 1;
+            unsigned showSprites: 1;
+            unsigned emphasizeRed: 1;
+            unsigned emphasizeGreen: 1;
+            unsigned emphasizeBlue: 1;
         };
-
         u8 val;
     } ppumask;
 
     //$2002 PPUSTATUS
     union {
-        struct
-        {
-            unsigned leastSignificantBits : 5;
-            unsigned spriteOverflow : 1;
-            unsigned spriteZeroHit : 1;
-            unsigned vBlank : 1;
+        struct {
+            unsigned leastSignificantBits: 5;
+            unsigned spriteOverflow: 1;
+            unsigned spriteZeroHit: 1;
+            unsigned vBlank: 1;
         };
-
         u8 val;
     } ppustatus;
 
@@ -128,7 +122,8 @@ class PPU : public INESBus {
         4293717740, 4283210476, 4286086380, 4289749740, 4293154028, 4293679284, 4293683812, 4292118560,
         4288719360, 4285842432, 4283224096, 4281912428, 4281906380, 4282137660, 4278190080, 4278190080,
         4293717740, 4289252588, 4290559212, 4292129516, 4293701356, 4293701332, 4293702832, 4293182608,
-        4291613304, 4290043512, 4289258128, 4288209588, 4288730852, 4288717472, 4278190080, 4278190080};
+        4291613304, 4290043512, 4289258128, 4288209588, 4288730852, 4288717472, 4278190080, 4278190080
+    };
 
     //BG
     u8 bg_palette[16] = {0};

@@ -3,7 +3,6 @@
 
 #include <stdint.h>
 
-// namespace MedNES
 namespace MedNES {
     typedef uint8_t u8;
     typedef uint16_t u16;
