@@ -2,11 +2,11 @@
 
 #include <iostream>
 
-#include "./include/6502.hpp"
-#include "./include/Controller.hpp"
-#include "./include/Mapper/Mapper.hpp"
-#include "./include/PPU.hpp"
-#include "./include/ROM.hpp"
+#include "include/6502.hpp"
+#include "include/Controller.hpp"
+#include "include/Mapper/Mapper.hpp"
+#include "include/PPU.hpp"
+#include "include/ROM.hpp"
 
 #define TARGET_FPS 60
 #define FRAME_DELAY (1000 / TARGET_FPS)
