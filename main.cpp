@@ -1,4 +1,4 @@
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 #include <chrono>
 #include <iostream>
@@ -11,47 +11,11 @@
 #include "src/ROM.hpp"
 
 int main(int argc, char **argv) {
-    std::string romPath = "";
-    std::string COMMAND_LINE_ERROR_MESSAGE = "Use -insert <path/to/rom> to start playing.";
-    bool fullscreen = false;
+    std::string romPath = argv[1];
 
-    if (argc < 2) {
-        std::cout << COMMAND_LINE_ERROR_MESSAGE << std::endl;
-        return 1;
+    if(SDL_Init(SDL_INIT_EVERYTHING) != 0){
+        return 1; // SDL_Init failed. 
     }
-
-    std::string option = argv[1];
-
-    if (option == "-insert") {
-        romPath = argv[2];
-    } else {
-        std::cout << "Unkown option '" << option << "'. " << COMMAND_LINE_ERROR_MESSAGE << std::endl;
-        return 1;
-    }
-
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER) < 0) {
-        std::cout << "SDL could not initialize." << SDL_GetError() << std::endl;
-    }
-
-    SDL_GameController *con = nullptr;
-
-    for (int i = 0; i < SDL_NumJoysticks(); i++) {
-        if (SDL_IsGameController(i)) {
-            con = SDL_GameControllerOpen(i);
-            std::cout << "Controller detected.";
-            break;
-        }
-    }
-
-    //TODO: Refactor me
-    std::map<int, int> map;
-    map.insert(std::pair<int, int>(SDL_CONTROLLER_BUTTON_A, SDLK_a));
-    map.insert(std::pair<int, int>(SDL_CONTROLLER_BUTTON_B, SDLK_b));
-    map.insert(std::pair<int, int>(SDL_CONTROLLER_BUTTON_START, SDLK_RETURN));
-    map.insert(std::pair<int, int>(SDL_CONTROLLER_BUTTON_DPAD_UP, SDLK_UP));
-    map.insert(std::pair<int, int>(SDL_CONTROLLER_BUTTON_DPAD_DOWN, SDLK_DOWN));
-    map.insert(std::pair<int, int>(SDL_CONTROLLER_BUTTON_DPAD_LEFT, SDLK_LEFT));
-    map.insert(std::pair<int, int>(SDL_CONTROLLER_BUTTON_DPAD_RIGHT, SDLK_RIGHT));
 
     SDL_Window *window;
     std::string window_title = "cloNES";
@@ -67,10 +31,10 @@ int main(int argc, char **argv) {
     );
 
     if (window == NULL) {
-        printf("Could not create window: %s\n", SDL_GetError());
-        return 1;
+        return 1; // SDL_CreateWindow failed. 
     }
 
+    bool fullscreen = false;
     if (fullscreen) {
         SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
     }
@@ -100,7 +64,6 @@ int main(int argc, char **argv) {
     //For perf
     int nmiCounter = 0;
     float duration = 0;
-    auto t1 = std::chrono::high_resolution_clock::now();
 
     while (is_running) {
         cpu.step();
@@ -109,12 +72,6 @@ int main(int argc, char **argv) {
             //Poll controller
             while (SDL_PollEvent(&event)) {
                 switch (event.type) {
-                    case SDL_CONTROLLERBUTTONDOWN:
-                        controller.setButtonPressed(map.find(event.cbutton.button)->second, true);
-                        break;
-                    case SDL_CONTROLLERBUTTONUP:
-                        controller.setButtonPressed(map.find(event.cbutton.button)->second, false);
-                        break;
                     case SDL_KEYDOWN:
                         controller.setButtonPressed(event.key.keysym.sym, true);
                         break;
@@ -128,19 +85,6 @@ int main(int argc, char **argv) {
                         break;
                 }
             }
-            //Measure fps
-            nmiCounter++;
-            auto t2 = std::chrono::high_resolution_clock::now();
-            duration += std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
-            t1 = std::chrono::high_resolution_clock::now();
-
-            if (nmiCounter == 10) {
-                float avgFps = 1000 / (duration / nmiCounter);
-                std::string fpsTitle = window_title + " (FPS: " + std::to_string((int)avgFps) + ")";
-                SDL_SetWindowTitle(window, fpsTitle.c_str());
-                nmiCounter = 0;
-                duration = 0;
-            }
 
             //Draw frame
             ppu.generateFrame = false;
@@ -152,9 +96,8 @@ int main(int argc, char **argv) {
         }
     }
 
-    SDL_Delay(3000);
-
     SDL_DestroyWindow(window);
+    SDL_Quit();
 
     return 0;
 }

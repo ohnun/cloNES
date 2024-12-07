@@ -25,17 +25,22 @@ $ git clone https://github.com/ohnun/cloNES.git
 $ cd cloNES
 $ make -j8 # or make
 
-# Execute in cloNES/ folder. 
-$ ./cloNES -insert <path/to/rom>
+# Execute. 
+$ ./cloNES <path/to/rom>
 ```
 
 ### Usage
 
-- arrow keys, 
-- enter (start), 
-- space (select), 
-- X (A), 
-- C (B). 
+| keyboard | function |
+|:-:|:-|
+| <kbd>W</kbd> | UP |
+| <kbd>S</kbd> | DOWN |
+| <kbd>A</kbd> | LEFT |
+| <kbd>D</kbd> | RIGHT |
+| <kbd>Enter</kbd> | start |
+| <kbd>Space</kbd> | select |
+| <kbd>J</kbd> | A |
+| <kbd>K</kbd> | B |
 
 ## License
 >This program is free software: you can redistribute it and/or modify it under the terms of the MIT License.
