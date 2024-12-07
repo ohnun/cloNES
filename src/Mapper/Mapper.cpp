@@ -1,4 +1,4 @@
-#include "../include/Mapper/Mapper.hpp"
+#include "../../include/Mapper/Mapper.hpp"
 
 namespace MedNES {
 
