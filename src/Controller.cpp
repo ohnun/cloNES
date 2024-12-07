@@ -1,4 +1,4 @@
-#include "Controller.hpp"
+#include "../include/Controller.hpp"
 
 namespace MedNES {
 
@@ -30,36 +30,38 @@ void Controller::write(u16 address, u8 data) {
 }
 
 void Controller::setButtonPressed(SDL_Keycode key, bool pressed) {
-    if (key == SDLK_j) { // button A
-        btnState = (pressed) ? (btnState | (1 << 0)) : (btnState & ~(1 << 0));
-    }
+    switch (key) {
+        case SDLK_j: // button A
+            btnState = (pressed) ? (btnState | (1 << 0)) : (btnState & ~(1 << 0));
+            break;
 
-    if (key == SDLK_k) { // button B
-        btnState = (pressed) ? (btnState | (1 << 1)) : (btnState & ~(1 << 1));
-    }
+        case SDLK_k: // button B
+            btnState = (pressed) ? (btnState | (1 << 1)) : (btnState & ~(1 << 1));
+            break;
 
-    if (key == SDLK_SPACE) { // Select
-        btnState = (pressed) ? (btnState | (1 << 2)) : (btnState & ~(1 << 2));
-    }
+        case SDLK_q: // Select
+            btnState = (pressed) ? (btnState | (1 << 2)) : (btnState & ~(1 << 2));
+            break;
 
-    if (key == SDLK_RETURN) { // Start
-        btnState = (pressed) ? (btnState | (1 << 3)) : (btnState & ~(1 << 3));
-    }
+        case SDLK_e: // Start
+            btnState = (pressed) ? (btnState | (1 << 3)) : (btnState & ~(1 << 3));
+            break;
 
-    if (key == SDLK_w) { // UP
-        btnState = (pressed) ? (btnState | (1 << 4)) : (btnState & ~(1 << 4));
-    }
+        case SDLK_w: // UP
+            btnState = (pressed) ? (btnState | (1 << 4)) : (btnState & ~(1 << 4));
+            break;
 
-    if (key == SDLK_s) { // DOWN
-        btnState = (pressed) ? (btnState | (1 << 5)) : (btnState & ~(1 << 5));
-    }
+        case SDLK_s: // DOWN
+            btnState = (pressed) ? (btnState | (1 << 5)) : (btnState & ~(1 << 5));
+            break;
 
-    if (key == SDLK_a) { // LEFT
-        btnState = (pressed) ? (btnState | (1 << 6)) : (btnState & ~(1 << 6));
-    }
+        case SDLK_a: // LEFT
+            btnState = (pressed) ? (btnState | (1 << 6)) : (btnState & ~(1 << 6));
+            break;
 
-    if (key == SDLK_d) { // RIGHT
-        btnState = (pressed) ? (btnState | (1 << 7)) : (btnState & ~(1 << 7));
+        case SDLK_d: // RIGHT
+            btnState = (pressed) ? (btnState | (1 << 7)) : (btnState & ~(1 << 7));
+            break;
     }
 }
 

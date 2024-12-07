@@ -1,5 +1,4 @@
-
-#include "CNROM.hpp"
+#include "../include/Mapper/CNROM.hpp"
 
 namespace MedNES {
 

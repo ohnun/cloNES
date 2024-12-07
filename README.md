@@ -31,16 +31,16 @@ $ ./cloNES <path/to/rom>
 
 ### Usage
 
-| keyboard         | function |
-| :-:              | :-:      |
-| <kbd>W</kbd>     | UP       |
-| <kbd>S</kbd>     | DOWN     |
-| <kbd>A</kbd>     | LEFT     |
-| <kbd>D</kbd>     | RIGHT    |
-| <kbd>Enter</kbd> | Start    |
-| <kbd>Space</kbd> | Select   |
-| <kbd>J</kbd>     | A        |
-| <kbd>K</kbd>     | B        |
+| keyboard     | function |
+| :-:          | :-:      |
+| <kbd>W</kbd> | UP       |
+| <kbd>S</kbd> | DOWN     |
+| <kbd>A</kbd> | LEFT     |
+| <kbd>D</kbd> | RIGHT    |
+| <kbd>E</kbd> | Start    |
+| <kbd>Q</kbd> | Select   |
+| <kbd>J</kbd> | A        |
+| <kbd>K</kbd> | B        |
 
 ## License
 >This program is free software: you can redistribute it and/or modify it under the terms of the MIT License.
