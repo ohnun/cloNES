@@ -30,22 +30,28 @@ void Controller::write(u16 address, u8 data) {
 }
 
 void Controller::setButtonPressed(SDL_Keycode key, bool pressed) {
-    if (key == SDLK_a) {
+    // button A
+    if (key == SDLK_x) {
         btnState = (pressed) ? (btnState | (1 << 0)) : (btnState & ~(1 << 0));
     }
 
-    if (key == SDLK_b) {
+    // button B
+    if (key == SDLK_c) {
         btnState = (pressed) ? (btnState | (1 << 1)) : (btnState & ~(1 << 1));
     }
 
+    // select
     if (key == SDLK_SPACE) {
         btnState = (pressed) ? (btnState | (1 << 2)) : (btnState & ~(1 << 2));
     }
 
+    // start
     if (key == SDLK_RETURN) {
         btnState = (pressed) ? (btnState | (1 << 3)) : (btnState & ~(1 << 3));
     }
 
+
+    // arrow keys
     if (key == SDLK_UP) {
         btnState = (pressed) ? (btnState | (1 << 4)) : (btnState & ~(1 << 4));
     }
