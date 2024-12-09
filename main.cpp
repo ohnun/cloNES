@@ -18,8 +18,6 @@ int main(int argc, char **argv) {
     }
 
     SDL_Window *window;
-    bool headlessMode = false;
-
     std::string window_title = "cloNES";
     window = SDL_CreateWindow(
         window_title.c_str(),     // window title
@@ -39,7 +37,7 @@ int main(int argc, char **argv) {
         SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
     }
 
-    SDL_Event event;
+    bool headlessMode = false;
     // We create a renderer with hardware acceleration, 
     // we also present according with the vertical sync refresh.
     SDL_Renderer *s = SDL_CreateRenderer(
@@ -70,6 +68,7 @@ int main(int argc, char **argv) {
         240
     );
 
+    SDL_Event event;
     bool is_running = true;
     while (is_running) {
         cpu.step();
@@ -81,15 +80,12 @@ int main(int argc, char **argv) {
             while (SDL_PollEvent(&event)) {
                 switch (event.type) {
                     case SDL_KEYDOWN:
-                        controller.setButtonPressed(event.key.keysym.sym, true);
+                        is_running = controller.setButtonPressed(event.key.keysym.sym, true);
                         break;
                     case SDL_KEYUP:
-                        controller.setButtonPressed(event.key.keysym.sym, false);
+                        is_running = controller.setButtonPressed(event.key.keysym.sym, false);
                         break;
-                    case SDL_QUIT:
-                        is_running = false;
-                        break;
-                    default:
+                    default: 
                         break;
                 }
             }

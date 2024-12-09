@@ -44,6 +44,7 @@ $ ./cloNES <path/to/rom>
 | <kbd>Q</kbd> | Select   |
 | <kbd>J</kbd> | A        |
 | <kbd>K</kbd> | B        |
+| <kbd>X</kbd> | Quit     |
 
 ## References
 

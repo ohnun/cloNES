@@ -29,39 +29,42 @@ void Controller::write(u16 address, u8 data) {
     }
 }
 
-void Controller::setButtonPressed(SDL_Keycode key, bool pressed) {
+bool Controller::setButtonPressed(SDL_Keycode key, bool pressed) {
     switch (key) {
         case SDLK_j: // button A
             btnState = (pressed) ? (btnState | (1 << 0)) : (btnState & ~(1 << 0));
-            break;
+            return true;
 
         case SDLK_k: // button B
             btnState = (pressed) ? (btnState | (1 << 1)) : (btnState & ~(1 << 1));
-            break;
+            return true;
 
         case SDLK_q: // Select
             btnState = (pressed) ? (btnState | (1 << 2)) : (btnState & ~(1 << 2));
-            break;
+            return true;
 
         case SDLK_e: // Start
             btnState = (pressed) ? (btnState | (1 << 3)) : (btnState & ~(1 << 3));
-            break;
+            return true;
 
         case SDLK_w: // UP
             btnState = (pressed) ? (btnState | (1 << 4)) : (btnState & ~(1 << 4));
-            break;
+            return true;
 
         case SDLK_s: // DOWN
             btnState = (pressed) ? (btnState | (1 << 5)) : (btnState & ~(1 << 5));
-            break;
+            return true;
 
         case SDLK_a: // LEFT
             btnState = (pressed) ? (btnState | (1 << 6)) : (btnState & ~(1 << 6));
-            break;
+            return true;
 
         case SDLK_d: // RIGHT
             btnState = (pressed) ? (btnState | (1 << 7)) : (btnState & ~(1 << 7));
-            break;
+            return true;
+
+        case SDLK_x: // Exit
+            return false;
     }
 }
 

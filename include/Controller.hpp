@@ -23,7 +23,7 @@ public:
     void write(u16 address, u8 data);
 
     //Input
-    void setButtonPressed(SDL_Keycode, bool);
+    bool setButtonPressed(SDL_Keycode, bool);
 };
 
 };  //namespace MedNES
