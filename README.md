@@ -47,7 +47,7 @@ $ ./cloNES <path/to/rom>
 
 ## References
 
->1.[Re: 从零开始的红白机模拟 - [02]ROM](https://github.com/dustpg/blogfm/issues?page=2&q=is%3Aopen+is%3Aissue+label%3AFC%2FNES)
+>1.[Re: 从零开始的红白机模拟 - [02]ROM](https://github.com/dustpg/BlogFM/issues/6)
 
 ## License
 

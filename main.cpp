@@ -12,8 +12,7 @@
 #define FRAME_DELAY (1000 / TARGET_FPS)
 
 int main(int argc, char **argv) {
-    std::string romPath = argv[1];
-
+    
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0){
         return 1; // SDL_Init failed. 
     }
@@ -40,28 +39,38 @@ int main(int argc, char **argv) {
         SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
     }
 
-    bool is_running = true;
-
     SDL_Event event;
-    // We create a renderer with hardware acceleration, we also present according with the vertical sync refresh.
-    SDL_Renderer *s = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | ((headlessMode) ? 0 : SDL_RENDERER_PRESENTVSYNC));
+    // We create a renderer with hardware acceleration, 
+    // we also present according with the vertical sync refresh.
+    SDL_Renderer *s = SDL_CreateRenderer(
+        window, 
+        0, 
+        SDL_RENDERER_ACCELERATED | ((headlessMode) ? 0 : SDL_RENDERER_PRESENTVSYNC)
+    );
 
+    std::string romPath = argv[1];
     MedNES::ROM rom;
     rom.open(romPath);
     rom.printHeader();
-    MedNES::Mapper *mapper = rom.getMapper();
 
-    if (mapper == NULL) {
-        std::cout << "Unknown mapper.";
-        return 1;
+    MedNES::Mapper *mapper = rom.getMapper();
+    if (mapper == NULL) { 
+        return 1; // Unknown mapper. 
     }
 
     auto ppu = MedNES::PPU(mapper);
     MedNES::Controller controller;
     auto cpu = MedNES::CPU6502(mapper, &ppu, &controller);
     cpu.reset();
-    SDL_Texture *texture = SDL_CreateTexture(s, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, 256, 240);
+    SDL_Texture *texture = SDL_CreateTexture(
+        s, 
+        SDL_PIXELFORMAT_ARGB8888, 
+        SDL_TEXTUREACCESS_STATIC, 
+        256, 
+        240
+    );
 
+    bool is_running = true;
     while (is_running) {
         cpu.step();
 

@@ -12,9 +12,11 @@
 namespace MedNES {
 
 void ROM::open(std::string filePath) {
+
+    // Read the file <filePath> as binary into the <in> object. 
     std::ifstream in(filePath, std::ios::binary);
 
-    //Read header
+    //Read header (16 bytes)
     in.read(reinterpret_cast<char *>(&header.nes), sizeof(char[4]));
     in.read(reinterpret_cast<char *>(&header.prgIn16kb), sizeof(u8));
     in.read(reinterpret_cast<char *>(&header.chrIn8kb), sizeof(u8));
@@ -26,9 +28,11 @@ void ROM::open(std::string filePath) {
     in.read(reinterpret_cast<char *>(&header.zeros), sizeof(char[5]));
 
     trainer.reserve(512);
+
     int prgSize = header.prgIn16kb * 16384;
-    int chrSize = header.chrIn8kb * 8192;
     prgCode.resize(prgSize);
+
+    int chrSize = header.chrIn8kb * 8192;
     chrData.resize(chrSize);
 
     mirroring = header.flags6 & 1;
