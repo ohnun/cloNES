@@ -17,15 +17,18 @@ These instructions will get you a copy of the project up and running on your loc
 
 * [libSDL2](https://www.libsdl.org/download-2.0.php)
 
-### Build And Execute ### 
+### Build ### 
 
 ```bash
-# Build the project. 
 $ git clone https://github.com/ohnun/cloNES.git
 $ cd cloNES
 $ make -j8 # or make
+```
 
-# Execute. 
+### Execute ###
+
+```bash
+# In the cloNES folder. 
 $ ./cloNES <path/to/rom>
 ```
 
@@ -42,5 +45,13 @@ $ ./cloNES <path/to/rom>
 | <kbd>J</kbd> | A        |
 | <kbd>K</kbd> | B        |
 
+## References
+
+>1.[Re: 从零开始的红白机模拟 - [02]ROM](https://github.com/dustpg/blogfm/issues?page=2&q=is%3Aopen+is%3Aissue+label%3AFC%2FNES)
+
 ## License
->This program is free software: you can redistribute it and/or modify it under the terms of the MIT License.
+
+Copyright &copy; 2024 Ohnun
+
+This project is [MIT](./LICENSE)
+

@@ -2,6 +2,5 @@
 MedNES
 .vscode
 build
-Games/
 
-test.cpp
+Games/
