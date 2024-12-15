@@ -1,42 +1,60 @@
-# MedNES
-MedNES is a cycle-accurate NES emulator written in C++.
-Supported mappers: NROM(0), MMC1(1), UNROM(2), CNROM(3)
+# cloNES
 
-Try it out in your browser [here](https://wpmed92.github.io)!
+**cloNES** is an NES emulator fork from [MedNES](https://github.com/wpmed92/MedNES), 
+which is a cycle-accurate NES emulator written in C++. 
+
+Supported mappers: 
+- NROM(0), 
+- MMC1(1), 
+- UNROM(2), 
+- CNROM(3). 
 
 ## Getting Started ##
+
 These instructions will get you a copy of the project up and running on your local machine.
 
 ### Prerequisites ###
-* **[GIT](https://git-scm.com)**
-* **[libSDL2](https://www.libsdl.org/download-2.0.php)**
 
-### Cloning This Repository ###
-1. Open Terminal.
-2. Change the current working directory to the location where you want the cloned directory to be made.
-3. Type `git clone https://github.com/wpmed92/MedNES.git`
-4. Press Enter. *Your local clone will be created*.
+* [libSDL2](https://www.libsdl.org/download-2.0.php)
 
-**Build**
+### Build ### 
 
-`make`
+```bash
+$ git clone https://github.com/ohnun/cloNES.git
+$ cd cloNES
+$ make -j8 # or make
+```
 
-**Execute**
+### Execute ###
 
-`./MedNES -insert <path/to/rom>`
+```bash
+# In the cloNES folder. 
+$ ./cloNES <path/to/rom>
+```
 
-## Projects
+### Usage
 
-Here are some projects that build on top of MedNES:
+| keyboard     | function |
+| :-:          | :-:      |
+| <kbd>W</kbd> | UP       |
+| <kbd>S</kbd> | DOWN     |
+| <kbd>A</kbd> | LEFT     |
+| <kbd>D</kbd> | RIGHT    |
+| <kbd>E</kbd> | Start    |
+| <kbd>Q</kbd> | Select   |
+| <kbd>J</kbd> | A        |
+| <kbd>K</kbd> | B        |
+| <kbd>X</kbd> | Quit     |
 
-* **[nes-memoryview](https://github.com/sniklaus/nes-memoryview)**: This project is really interesting. It shows how each byte in the 2kB RAM changes over time. You can associate sprite movements with OAM bytes just by looking at the plots! Also, this is the project that enabled the web port!
-* **[doogmorning NES emulator](https://gitee.com/doogmorning/programming-windows-/tree/master/FC%E6%A8%A1%E6%8B%9F%E5%99%A8)**: I came across this NES emulator, which added MedNES to its reference list. Go check it out!
+## References
 
+> 1.[Re: 从零开始的红白机模拟 - [02]ROM](https://github.com/dustpg/BlogFM/issues/6) \
+> 2.[Programming Basics](https://www.nesdev.org/wiki/Programming_Basics) \
+> 3.[6502 Instruction Set](https://www.masswerk.at/6502/6502_instruction_set.html)
 
 ## License
->This program is free software: you can redistribute it and/or modify it under the terms of the MIT License.
 
->This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the [MIT License](https://en.wikipedia.org/wiki/MIT_License) for more details.
+Copyright &copy; 2024 Ohnun
 
-## Contributing Code
-_We'd love to accept your patches_! If you have improvements, send us your pull requests!
+This project is [MIT](./LICENSE)
+
