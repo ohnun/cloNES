@@ -924,17 +924,21 @@ u8 CPU6502::memoryAccess(MemoryAccessMode mode, u16 address, u8 data) {
 
     if (address >= 0 && address < 0x2000) {
         if (mode == MemoryAccessMode::READ) {
-            readData = ram.read(address);
+            readData = ram->read(address);
         } else {
-            ram.write(address, data);
+            ram->write(address, data);
         }
-    } else if (address >= 0x2000 && address < 0x4000) {
+    } 
+
+    else if (address >= 0x2000 && address < 0x4000) {
         if (mode == MemoryAccessMode::READ) {
             readData = ppu->read(address);
         } else {
             ppu->write(address, data);
         }
-    } else if (address >= 0x4000 && address < 0x4018) {
+    } 
+
+    else if (address >= 0x4000 && address < 0x4018) {
         //COPY OAM
         if (address == 0x4014) {
             if (mode == MemoryAccessMode::READ) {
@@ -955,9 +959,13 @@ u8 CPU6502::memoryAccess(MemoryAccessMode mode, u16 address, u8 data) {
             }
         }
         //APU I/O registers
-    } else if (address >= 0x4018 && address < 0x4020) {
+    } 
+
+    else if (address >= 0x4018 && address < 0x4020) {
         //CPU test mode
-    } else if (address >= 0x6000 && address <= 0xFFFF) {
+    } 
+
+    else if (address >= 0x6000 && address <= 0xFFFF) {
         if (mode == MemoryAccessMode::READ) {
             readData = mapper->read(address);
         } else {

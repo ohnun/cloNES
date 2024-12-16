@@ -1,5 +1,5 @@
 bin = cloNES
-src = $(wildcard source/*.cpp source/mapper/*.cpp source/common/*.cpp main.cpp)
+src = $(wildcard source/*.cpp source/mapper/*.cpp source/common/*.cpp emulator.cpp main.cpp)
 obj = $(src:.cpp=.o)
 
 CXX = g++

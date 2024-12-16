@@ -22,7 +22,7 @@ These instructions will get you a copy of the project up and running on your loc
 ```bash
 $ git clone https://github.com/ohnun/cloNES.git
 $ cd cloNES
-$ make -j8 # or make
+$ make -j12 # or make
 ```
 
 ### Execute ###
@@ -48,14 +48,7 @@ $ ./cloNES <path/to/rom>
 
 ## References
 
-1. [Re: 从零开始的红白机模拟 - [02]ROM](https://github.com/dustpg/BlogFM/issues/6)
-1. [6502 Instruction Set](https://www.masswerk.at/6502/6502_instruction_set.html) 
-1. [NES基本原理 (一) 总述](https://www.nowcoder.com/discuss/565531965722472448)
-1. [NES基本原理 (二) CPU](https://www.nowcoder.com/discuss/565551215161942016)
-1. [NES基本原理 (三) PPU](https://www.nowcoder.com/discuss/565553764464091136)
-1. [NES基本原理 (六) 手柄](https://www.nowcoder.com/discuss/565558934224777216)
-1. [NES基本原理 (七) Mapper](https://www.nowcoder.com/discuss/565560219778940928)
-1. [NES基本原理 (八) MUSIC](https://www.nowcoder.com/discuss/565561509040906240)
+1. [NES programming guide](https://www.nesdev.org/wiki/Programming_guide)
 
 ## License
 

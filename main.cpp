@@ -2,35 +2,24 @@
 
 #include <iostream>
 
-#include "include/6502.hpp"
-#include "include/Controller.hpp"
-#include "include/Mapper/Mapper.hpp"
-#include "include/PPU.hpp"
-#include "include/ROM.hpp"
+#include "emulator.hpp"
 
 #define TARGET_FPS 60
 #define FRAME_DELAY (1000 / TARGET_FPS)
 
 int main(int argc, char **argv) {
     
-    if(SDL_Init(SDL_INIT_EVERYTHING) != 0){
-        return 1; // SDL_Init failed. 
-    }
+    if(SDL_Init(SDL_INIT_EVERYTHING) != 0) return -1;
 
-    SDL_Window *window;
-    std::string window_title = "cloNES";
-    window = SDL_CreateWindow(
-        window_title.c_str(),     // window title
+    SDL_Window *window = SDL_CreateWindow(
+        "cloNES",                 // window title
         SDL_WINDOWPOS_CENTERED,   // initial x position
         SDL_WINDOWPOS_CENTERED,   // initial y position
         512,                      // width, in pixels
         480,                      // height, in pixels
         SDL_WINDOW_SHOWN          // flags - see below
     );
-
-    if (window == NULL) {
-        return 1; // SDL_CreateWindow failed. 
-    }
+    if (!window) return -1;
 
     bool fullscreen = false;
     if (fullscreen) {
@@ -40,49 +29,40 @@ int main(int argc, char **argv) {
     bool headlessMode = false;
     // We create a renderer with hardware acceleration, 
     // we also present according with the vertical sync refresh.
-    SDL_Renderer *s = SDL_CreateRenderer(
+    SDL_Renderer *renderer = SDL_CreateRenderer(
         window, 
-        0, 
+        -1, 
         SDL_RENDERER_ACCELERATED | ((headlessMode) ? 0 : SDL_RENDERER_PRESENTVSYNC)
     );
+    if(!renderer) return -1;
 
+    // Initialize emulator. 
     std::string romPath = argv[1];
-    MedNES::ROM rom;
-    rom.open(romPath);
-    rom.printHeader();
+    auto emulator = new cloNES::emulator(romPath);
 
-    MedNES::Mapper *mapper = rom.getMapper();
-    if (mapper == NULL) { 
-        return 1; // Unknown mapper. 
-    }
-
-    auto ppu = MedNES::PPU(mapper);
-    MedNES::Controller controller;
-    auto cpu = MedNES::CPU6502(mapper, &ppu, &controller);
-    cpu.reset();
     SDL_Texture *texture = SDL_CreateTexture(
-        s, 
+        renderer, 
         SDL_PIXELFORMAT_ARGB8888, 
         SDL_TEXTUREACCESS_STATIC, 
-        256, 
-        240
+        256, 240
     );
+    if(!texture) return -1;
 
     SDL_Event event;
-    bool is_running = true;
+    bool isRunning = true;
     Uint32 frameStart = SDL_GetTicks();
-    while (is_running) {
-        cpu.step();
-        if(!ppu.generateFrame) continue;
+    while (isRunning) {
+        emulator->step();
+        if(!emulator->getPpuFlag()) continue;
 
         //Poll controller
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
                 case SDL_KEYDOWN:
-                    is_running = controller.setButtonPressed(event.key.keysym.sym, true);
+                    isRunning = emulator->keyDown(event.key.keysym.sym);
                     break;
                 case SDL_KEYUP:
-                    is_running = controller.setButtonPressed(event.key.keysym.sym, false);
+                    isRunning = emulator->keyUp(event.key.keysym.sym);
                     break;
                 default: 
                     break;
@@ -90,12 +70,11 @@ int main(int argc, char **argv) {
         }
 
         //Draw frame
-        ppu.generateFrame = false;
-        SDL_RenderSetScale(s, 2, 2);
-        SDL_UpdateTexture(texture, NULL, ppu.buffer, 256 * sizeof(Uint32));
-        SDL_RenderClear(s);
-        SDL_RenderCopy(s, texture, NULL, NULL);
-        SDL_RenderPresent(s);
+        emulator->setPpuFlag(false);
+        SDL_UpdateTexture(texture, NULL, emulator->getPpuBuffer(), 256 * sizeof(Uint32));
+        SDL_RenderClear(renderer);
+        SDL_RenderCopy(renderer, texture, NULL, NULL);
+        SDL_RenderPresent(renderer);
 
         // Lock fps. 
         Uint32 frameTime = SDL_GetTicks() - frameStart;
@@ -106,6 +85,8 @@ int main(int argc, char **argv) {
     }
 
     SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyTexture(texture);
     SDL_Quit();
 
     return 0;

@@ -43,8 +43,8 @@ class CPU6502 {
     };
 
 public:
-    CPU6502(Mapper *mapper, PPU *ppu, Controller *controller) 
-    : mapper(mapper), ppu(ppu), controller(controller){};
+    CPU6502(RAM *ram, Mapper *mapper, PPU *ppu, Controller *controller) 
+    :ram(ram), mapper(mapper), ppu(ppu), controller(controller){};
 
     u8 fetchInstruction();
     void executeInstruction(u8 instruction);
@@ -70,7 +70,7 @@ private:
     int cycle = 7;
 
     //Devices
-    RAM ram;
+    RAM *ram;
     Mapper *mapper;
     PPU *ppu;
     Controller *controller;
