@@ -1,49 +1,65 @@
-# MedNES
-MedNES is a cycle-accurate NES emulator written in C++.
-Supported mappers: NROM(0), MMC1(1), UNROM(2), CNROM(3)
+# cloNES
 
-Try it out in your browser [here](https://wpmed92.github.io)!
+**cloNES** is an NES emulator fork from [MedNES](https://github.com/wpmed92/MedNES), 
+which is a cycle-accurate NES emulator written in C++. 
+
+Supported mappers: 
+- NROM(0), 
+- MMC1(1), 
+- UNROM(2), 
+- CNROM(3). 
 
 ## Getting Started ##
+
 These instructions will get you a copy of the project up and running on your local machine.
 
 ### Prerequisites ###
-* **[GIT](https://git-scm.com)**
-* **[libSDL2](https://www.libsdl.org/download-2.0.php)**
 
-### Cloning This Repository ###
-1. Open Terminal.
-2. Change the current working directory to the location where you want the cloned directory to be made.
-3. Type `git clone https://github.com/wpmed92/MedNES.git`
-4. Press Enter. *Your local clone will be created*.
+* [libSDL2](https://www.libsdl.org/download-2.0.php)
 
-**Build**
+### Build ### 
 
-`make`
+```bash
+$ git clone https://github.com/ohnun/cloNES.git
+$ cd cloNES
+$ make -j8 # or make
+```
 
-**Execute**
+### Execute ###
 
-`./MedNES -insert <path/to/rom>`
+```bash
+# In the cloNES folder. 
+$ ./cloNES <path/to/rom>
+```
 
-### Screenshots ###
+### Usage
 
-| | | |
-|:-------------------------:|:-------------------------:|:-------------------------:|
-|![alt text](https://github.com/wpmed92/MedNES/blob/master/Screenshots/Super%20Mario%20Bros.png) Super Mario Bros |  ![alt text](https://github.com/wpmed92/MedNES/blob/master/Screenshots/Donkey-Kong.png) Donkey Kong |![alt text](https://github.com/wpmed92/MedNES/blob/master/Screenshots/Bomberman%20II.png) Bomberman II |
-|![alt text](https://github.com/wpmed92/MedNES/blob/master/Screenshots/Pac-Man.png) Pac-Man |![alt text](https://github.com/wpmed92/MedNES/blob/master/Screenshots/Mega%20Man.png) Mega Man |![alt text](https://github.com/wpmed92/MedNES/blob/master/Screenshots/Zelda.png) The Legend of Zelda |
+| keyboard     | function |
+| :-:          | :-:      |
+| <kbd>W</kbd> | UP       |
+| <kbd>S</kbd> | DOWN     |
+| <kbd>A</kbd> | LEFT     |
+| <kbd>D</kbd> | RIGHT    |
+| <kbd>E</kbd> | Start    |
+| <kbd>Q</kbd> | Select   |
+| <kbd>J</kbd> | A        |
+| <kbd>K</kbd> | B        |
+| <kbd>X</kbd> | Quit     |
 
-## Projects
+## References
 
-Here are some projects that build on top of MedNES:
-
-* **[nes-memoryview](https://github.com/sniklaus/nes-memoryview)**: This project is really interesting. It shows how each byte in the 2kB RAM changes over time. You can associate sprite movements with OAM bytes just by looking at the plots! Also, this is the project that enabled the web port!
-* **[doogmorning NES emulator](https://gitee.com/doogmorning/programming-windows-/tree/master/FC%E6%A8%A1%E6%8B%9F%E5%99%A8)**: I came across this NES emulator, which added MedNES to its reference list. Go check it out!
-
+1. [Re: 从零开始的红白机模拟 - [02]ROM](https://github.com/dustpg/BlogFM/issues/6)
+1. [6502 Instruction Set](https://www.masswerk.at/6502/6502_instruction_set.html) 
+1. [NES基本原理 (一) 总述](https://www.nowcoder.com/discuss/565531965722472448)
+1. [NES基本原理 (二) CPU](https://www.nowcoder.com/discuss/565551215161942016)
+1. [NES基本原理 (三) PPU](https://www.nowcoder.com/discuss/565553764464091136)
+1. [NES基本原理 (六) 手柄](https://www.nowcoder.com/discuss/565558934224777216)
+1. [NES基本原理 (七) Mapper](https://www.nowcoder.com/discuss/565560219778940928)
+1. [NES基本原理 (八) MUSIC](https://www.nowcoder.com/discuss/565561509040906240)
 
 ## License
->This program is free software: you can redistribute it and/or modify it under the terms of the MIT License.
 
->This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the [MIT License](https://en.wikipedia.org/wiki/MIT_License) for more details.
+Copyright &copy; 2024 Ohnun
 
-## Contributing Code
-_We'd love to accept your patches_! If you have improvements, send us your pull requests!
+This project is [MIT](./LICENSE)
+
