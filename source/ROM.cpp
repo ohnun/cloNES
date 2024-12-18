@@ -12,6 +12,13 @@
 
 namespace MedNES {
 
+ROM::ROM(const std::string filePath) {
+    open(filePath);
+}
+ROM::ROM(const std::vector<u8> &byteStream) {
+    openWithByte(byteStream);
+}
+
 void ROM::open(std::string filePath) {
 
     // Read the file <filePath> as binary into the <in> object. 

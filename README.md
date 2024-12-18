@@ -49,6 +49,7 @@ $ ./cloNES <path/to/rom>
 ## References
 
 1. [NES programming guide](https://www.nesdev.org/wiki/Programming_guide)
+1. [6502 Instruction Set](https://www.masswerk.at/6502/6502_instruction_set.html)
 
 ## License
 

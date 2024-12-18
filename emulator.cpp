@@ -4,22 +4,22 @@ namespace cloNES {
 
     emulator::emulator(std::string romPath) {
         ram = new MedNES::RAM();
-        rom = new MedNES::ROM();
-        rom->open(romPath);
+        rom = new MedNES::ROM(romPath);
         mapper = rom->getMapper();
         ppu = new MedNES::PPU(mapper);
         controller = new MedNES::Controller();
-        cpu = new MedNES::CPU6502(ram, mapper, ppu, controller);
+        cpu = new cloNES::CPU(ram, mapper, ppu, controller);
+        
         cpu->reset();
     }
 
     emulator::~emulator() {
-        if(!ram)        delete ram;
-        if(!rom)        delete rom;
-        if(!mapper)     delete mapper;
-        if(!ppu)        delete ppu;
-        if(!controller) delete controller;
-        if(!cpu)        delete cpu;
+        if(ram)        delete ram;
+        if(rom)        delete rom;
+        if(mapper)     delete mapper;
+        if(ppu)        delete ppu;
+        if(controller) delete controller;
+        if(cpu)        delete cpu;
     }
 
     void emulator::step() {

@@ -2,7 +2,7 @@
 
 #include <SDL2/SDL.h>
 
-#include "include/6502.hpp"
+#include "include/CPU.hpp"
 #include "include/Controller.hpp"
 #include "include/Mapper/Mapper.hpp"
 #include "include/PPU.hpp"
@@ -13,7 +13,7 @@ namespace cloNES {
     
     class emulator {
     private: 
-        MedNES::CPU6502    *cpu        = nullptr;
+        cloNES::CPU        *cpu        = nullptr;
         MedNES::RAM        *ram        = nullptr;
         MedNES::ROM        *rom        = nullptr;
         MedNES::Mapper     *mapper     = nullptr;

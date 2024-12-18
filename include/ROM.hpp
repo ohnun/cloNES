@@ -28,13 +28,18 @@ struct INESHeader {
 
 class ROM {
 public:
+    ROM(const std::string filePath);
+    ROM(const std::vector<u8> &byteStream);
+
     std::vector<u8> getChrData() { return chrData; };
     std::vector<u8> getPrgCode() { return prgCode; };
-    void open(std::string);
-    void openWithByte(const std::vector<u8>& byteStream);
     void printHeader();
     int getMirroring();
     Mapper *getMapper();
+
+private:
+    void open(const std::string filePath);
+    void openWithByte(const std::vector<u8> &byteStream);
 
 private:
     INESHeader header;
